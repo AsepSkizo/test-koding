@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\harian;
+use App\Models\rekening;
+use App\Models\target;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +22,24 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        rekening::create([
+            "kode_rekening" => "41101.01",
+            "nama_rekening" => "Pajak Hotel Bintang 1"
+        ]);
+
+        target::create([
+            "kode_rekening" => "41101.01",
+            "target" => 60500000,
+            "masa_berlaku_awal" => "2022-01-01",
+            "masa_berlaku_akhir" => "2022-01-31"
+        ]);
+
+        harian::create([
+            "kode_rekening" => "41101.01",
+            "via" => "Bendahara",
+            "tanggal" => "2022-10-2",
+            "jumlah" => 2000000
+        ]);
     }
 }
