@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\harian;
+use App\Models\periode;
 use App\Models\rekening;
 use App\Models\target;
 use Illuminate\Database\Seeder;
@@ -31,8 +32,7 @@ class DatabaseSeeder extends Seeder
         target::create([
             "kode_rekening" => "41101.01",
             "target" => 60500000,
-            "masa_berlaku_awal" => "2022-01-01",
-            "masa_berlaku_akhir" => "2022-01-31"
+            "periode_id" => 1
         ]);
 
         harian::create([
@@ -40,6 +40,11 @@ class DatabaseSeeder extends Seeder
             "via" => "Bendahara",
             "tanggal" => "2022-10-2",
             "jumlah" => 2000000
+        ]);
+
+        periode::create([
+            "masa_berlaku_awal" => "2022-01-01",
+            "masa_berlaku_akhir" => "2022-12-31",
         ]);
     }
 }

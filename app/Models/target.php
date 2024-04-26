@@ -21,4 +21,14 @@ class target extends Model
     {
         return $this->belongsTo(rekening::class, 'kode_rekening', 'kode_rekening');
     }
+
+    /**
+     * Mendapatkan data periode terkait
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function periode(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'periode_id', 'id');
+    }
 }

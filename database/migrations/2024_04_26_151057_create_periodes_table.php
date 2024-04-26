@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('targets', function (Blueprint $table) {
+        Schema::create('periodes', function (Blueprint $table) {
             $table->id();
-            $table->string("kode_rekening");
-            // $table->string("nama_rekening");
-            $table->integer("target");
-            $table->integer("periode_id");
+            $table->date("masa_berlaku_awal");
+            $table->date("masa_berlaku_akhir");
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('targets');
+        Schema::dropIfExists('periodes');
     }
 };
