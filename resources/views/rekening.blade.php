@@ -36,11 +36,15 @@
                                 <th scope="row">#</th>
                                 <td>{{ $rekening['nama_rekening'] }}</td>
                                 <td>{{ $rekening['kode_rekening'] }}</td>
-                                <td class="">
+                                <td>
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#rekeningUpdate"
-                                        class="btn btn-warning"
+                                        class="btn btn-warning my-1"
                                         onclick="update('{{ $rekening['kode_rekening'] }}', '{{ $rekening['nama_rekening'] }}')">Edit</button>
-                                    <button type="button" class="btn btn-danger">Hapus</button>
+                                    <form action="{{ route('rekening.delete') }}" class="">
+                                        <input type="hidden" value="{{ $rekening['kode_rekening'] }}" name="kode_rekening">
+                                        <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('Apakah anda yakin ingin menghapus kode rekening?')">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

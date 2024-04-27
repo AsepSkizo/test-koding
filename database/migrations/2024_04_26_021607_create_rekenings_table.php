@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rekenings', function (Blueprint $table) {
-            // $table->id();
-            $table->string("kode_rekening")->primary();
+            $table->id();
+            $table->string("kode_rekening")->unique();
             $table->string("nama_rekening");
             $table->timestamps();
         });

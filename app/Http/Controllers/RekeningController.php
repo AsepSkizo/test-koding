@@ -49,6 +49,7 @@ class RekeningController extends Controller
             "nama_rekening" => $request->nama_rekening,
             "kode_rekening" => $request->kode_rekening
         ]);
+        return $rekening;
         if ($rekening) {
             return redirect("rekening")->with("success", "Rekening Berhasil diubah");
         } else {
