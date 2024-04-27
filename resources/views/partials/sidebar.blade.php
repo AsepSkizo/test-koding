@@ -16,17 +16,17 @@
      <li class="nav-item">
          <a class="nav-link" href="index.html">
              <i class="fas fa-fw fa-tachometer-alt"></i>
+             <span>Periode</span></a>
+     </li>
+     <li class="nav-item">
+         <a class="nav-link" href="index.html">
+             <i class="fas fa-fw fa-tachometer-alt"></i>
              <span>Target</span></a>
      </li>
      <li class="nav-item">
          <a class="nav-link" href="index.html">
              <i class="fas fa-fw fa-tachometer-alt"></i>
              <span>Harian</span></a>
-     </li>
-     <li class="nav-item">
-         <a class="nav-link" href="index.html">
-             <i class="fas fa-fw fa-tachometer-alt"></i>
-             <span>Periodea</span></a>
      </li>
      <!-- Divider -->
      <hr class="sidebar-divider d-none d-md-block">

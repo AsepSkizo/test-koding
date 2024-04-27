@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PeriodeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+/*
+| Setiap return view memerlukan variabel $title => untuk memberi judul halaman
+| 
+|*/
+
 Route::get('/', function () {
-    return view('periode', ["title" => "master"]);
+    return redirect('/periode');
 });
+
+
+// Menangani CRUD periode
+Route::get("/periode", [PeriodeController::class, 'index'])->name("periode.index");
+Route::post("/periode/tambah", [PeriodeController::class, 'store'])->name("periode.tambah");
