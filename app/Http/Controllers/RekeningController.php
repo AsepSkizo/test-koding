@@ -40,4 +40,19 @@ class RekeningController extends Controller
             return redirect("rekening")->with("error", "Rekening Gagal ditambahkan");
         }
     }
+
+    public function update(Request $request)
+    {
+        // return $request;
+
+        $rekening = rekening::where("kode_rekening", $request->kode_rekening)->update([
+            "nama_rekening" => $request->nama_rekening,
+            "kode_rekening" => $request->kode_rekening
+        ]);
+        if ($rekening) {
+            return redirect("rekening")->with("success", "Rekening Berhasil diubah");
+        } else {
+            return redirect("rekening")->with("error", "Rekening Gagal diubah");
+        }
+    }
 }

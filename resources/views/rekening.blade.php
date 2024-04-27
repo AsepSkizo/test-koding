@@ -36,7 +36,11 @@
                                 <th scope="row">#</th>
                                 <td>{{ $rekening['nama_rekening'] }}</td>
                                 <td>{{ $rekening['kode_rekening'] }}</td>
-                                <td>
+                                <td class="">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#rekeningUpdate"
+                                        class="btn btn-warning"
+                                        onclick="update('{{ $rekening['kode_rekening'] }}', '{{ $rekening['nama_rekening'] }}')">Edit</button>
+                                    <button type="button" class="btn btn-danger">Hapus</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -78,4 +82,44 @@
             </div>
         </div>
     </div>
+
+    {{-- Modal Ubah Rekening --}}
+    <div class="modal fade" id="rekeningUpdate" tabindex="-1" aria-labelledby="rekeningUpdateLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title fs-5" id="rekeningUpdateLabel">Ubah Rekening</h4>
+                    <button type="button" class="btn btn-block col-1" data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <form action="{{ route('rekening.edit') }}" method="POST">
+                    @csrf
+                    @method('put')
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="namaRekeningUpdate" class="form-label">Nama Rekening</label>
+                            <input type="text" class="form-control" id="namaRekeningUpdate" name="nama_rekening"
+                                placeholder="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="kodeRekeningUpdate" class="form-label">Kode Rekening</label>
+                            <input type="text" class="form-control" id="kodeRekeningUpdate" name="kode_rekening"
+                                placeholder="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning"
+                            onclick="return confirm('Apakah Anda Ingin menyimpan perubahan?')">Ubah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function update(kode_rekening, nama_rekening) {
+            document.getElementById('kodeRekeningUpdate').value = kode_rekening;
+            document.getElementById('namaRekeningUpdate').value = nama_rekening;
+        }
+    </script>
 @endsection

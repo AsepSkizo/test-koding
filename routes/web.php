@@ -28,6 +28,7 @@ Route::get('/', function () {
 // Menangani CRUD rekening
 Route::get("/rekening", [RekeningController::class, "index"])->name("rekening.index");
 Route::post("/rekening/tambah", [RekeningController::class, "store"])->name("rekening.tambah");
+Route::put("/rekening/edit/", [RekeningController::class, "update"])->name("rekening.edit");
 
 
 // Menangani CRUD periode
