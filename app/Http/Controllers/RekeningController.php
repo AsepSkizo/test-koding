@@ -45,11 +45,10 @@ class RekeningController extends Controller
     {
         // return $request;
 
-        $rekening = rekening::where("kode_rekening", $request->kode_rekening)->update([
-            "nama_rekening" => $request->nama_rekening,
-            "kode_rekening" => $request->kode_rekening
-        ]);
-        return $rekening;
+        $rekening = rekening::find($request->id_rekening);
+        $rekening->nama_rekening = $request->nama_rekening;
+        $rekening->kode_rekening = $request->kode_rekening;
+        $rekening->save();
         if ($rekening) {
             return redirect("rekening")->with("success", "Rekening Berhasil diubah");
         } else {

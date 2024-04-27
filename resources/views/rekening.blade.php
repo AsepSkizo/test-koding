@@ -39,7 +39,7 @@
                                 <td>
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#rekeningUpdate"
                                         class="btn btn-warning my-1"
-                                        onclick="update('{{ $rekening['kode_rekening'] }}', '{{ $rekening['nama_rekening'] }}')">Edit</button>
+                                        onclick="update('{{ $rekening['kode_rekening'] }}', '{{ $rekening['nama_rekening'] }}', '{{ $rekening['id'] }}')">Edit</button>
                                     <form action="{{ route('rekening.delete') }}" class="">
                                         <input type="hidden" value="{{ $rekening['kode_rekening'] }}" name="kode_rekening">
                                         <button type="submit" class="btn btn-danger"
@@ -109,6 +109,7 @@
                             <input type="text" class="form-control" id="kodeRekeningUpdate" name="kode_rekening"
                                 placeholder="">
                         </div>
+                        <input type="hidden" id="idRekening" name="id_rekening">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -121,9 +122,10 @@
     </div>
 
     <script>
-        function update(kode_rekening, nama_rekening) {
+        function update(kode_rekening, nama_rekening, id) {
             document.getElementById('kodeRekeningUpdate').value = kode_rekening;
             document.getElementById('namaRekeningUpdate').value = nama_rekening;
+            document.getElementById('idRekening').value = id;
         }
     </script>
 @endsection
