@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\harian;
 use App\Models\rekening;
+use App\Models\target;
 use Illuminate\Http\Request;
 
 /*
@@ -53,6 +55,24 @@ class RekeningController extends Controller
             return redirect("rekening")->with("success", "Rekening Berhasil diubah");
         } else {
             return redirect("rekening")->with("error", "Rekening Gagal diubah");
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        // return $request;
+        $countTarget = target::where("rekening_id", $request->id)->count();
+        $countHarian = harian::where("rekening_id", $request->id)->count();
+
+        if ($countHarian > 0 || $countTarget > 0) {
+            return redirect("rekening")->with("error", "Rekening Gagal dihapus");
+        }
+        $rekening = rekening::find($request->id);
+        $rekening->delete();
+        if ($rekening) {
+            return redirect("rekening")->with("success", "Rekening Berhasil dihapus");
+        } else {
+            return redirect("rekening")->with("error", "Rekening Gagal dihapus");
         }
     }
 }

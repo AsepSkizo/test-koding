@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('targets', function (Blueprint $table) {
             $table->id();
-            $table->string("kode_rekening");
+            $table->string("rekening_id");
             // $table->string("nama_rekening");
             $table->integer("target");
             $table->integer("periode_id");

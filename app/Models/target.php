@@ -19,7 +19,7 @@ class target extends Model
      */
     public function rekening(): BelongsTo
     {
-        return $this->belongsTo(rekening::class, 'kode_rekening', 'kode_rekening');
+        return $this->belongsTo(rekening::class, 'rekening_id', 'id');
     }
 
     /**

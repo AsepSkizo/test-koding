@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('harians', function (Blueprint $table) {
             $table->id();
-            $table->string("kode_rekening");
+            $table->string("rekening_id");
             // $table->string("")
             $table->enum("via", ["Bendahara", "Bank"]);
             $table->date("tanggal");

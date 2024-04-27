@@ -30,13 +30,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         target::create([
-            "kode_rekening" => "41101.01",
+            "rekening_id" => "1",
             "target" => 60500000,
             "periode_id" => 1
         ]);
 
         harian::create([
-            "kode_rekening" => "41101.01",
+            "rekening_id" => "1",
             "via" => "Bendahara",
             "tanggal" => "2022-10-2",
             "jumlah" => 2000000

@@ -18,7 +18,7 @@ class rekening extends Model
      */
     public function target(): HasMany
     {
-        return $this->hasMany(target::class, 'kode_rekening', 'kode_rekening');
+        return $this->hasMany(target::class, 'id', 'rekening_id');
     }
 
     /**
@@ -28,6 +28,6 @@ class rekening extends Model
      */
     public function harian(): HasMany
     {
-        return $this->hasMany(harian::class, 'kode_rekening', 'kode_rekening');
+        return $this->hasMany(harian::class, 'id', 'rekening_id');
     }
 }

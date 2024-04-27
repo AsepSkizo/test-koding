@@ -40,8 +40,10 @@
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#rekeningUpdate"
                                         class="btn btn-warning my-1"
                                         onclick="update('{{ $rekening['kode_rekening'] }}', '{{ $rekening['nama_rekening'] }}', '{{ $rekening['id'] }}')">Edit</button>
-                                    <form action="{{ route('rekening.delete') }}" class="">
-                                        <input type="hidden" value="{{ $rekening['kode_rekening'] }}" name="kode_rekening">
+                                    <form action="{{ route('rekening.delete') }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <input type="hidden" value="{{ $rekening['id'] }}" name="id">
                                         <button type="submit" class="btn btn-danger"
                                             onclick="return confirm('Apakah anda yakin ingin menghapus kode rekening?')">Hapus</button>
                                     </form>
