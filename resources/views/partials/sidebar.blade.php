@@ -14,12 +14,17 @@
 
      <!-- Nav Item - Dashboard -->
      <li class="nav-item">
-         <a class="nav-link" href="index.html">
+         <a class="nav-link" href="{{ route('periode.index') }}">
              <i class="fas fa-fw fa-tachometer-alt"></i>
              <span>Periode</span></a>
      </li>
      <li class="nav-item">
-         <a class="nav-link" href="index.html">
+         <a class="nav-link" href="{{ route('rekening.index') }}">
+             <i class="fas fa-fw fa-tachometer-alt"></i>
+             <span>Rekening</span></a>
+     </li>
+     <li class="nav-item">
+         <a class="nav-link" href="">
              <i class="fas fa-fw fa-tachometer-alt"></i>
              <span>Target</span></a>
      </li>

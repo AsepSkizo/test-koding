@@ -36,6 +36,8 @@ class PeriodeController extends Controller
 
         if ($periode) {
             return redirect("periode")->with("success", "Periode Berhasil ditambahkan");
+        } else {
+            return redirect("periode")->with("error", "Periode Gagal ditambahkan");
         }
     }
 }

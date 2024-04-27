@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PeriodeController;
+use App\Http\Controllers\RekeningController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,15 @@ Route::get('/', function () {
     return redirect('/periode');
 });
 
+// Menangani CRUD rekening
+Route::get("/rekening", [RekeningController::class, "index"])->name("rekening.index");
+Route::post("/rekening/tambah", [RekeningController::class, "store"])->name("rekening.tambah");
+
 
 // Menangani CRUD periode
 Route::get("/periode", [PeriodeController::class, 'index'])->name("periode.index");
 Route::post("/periode/tambah", [PeriodeController::class, 'store'])->name("periode.tambah");
+
+
+// Menangani CRUD Target
+// Route::get("")
