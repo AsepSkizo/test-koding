@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HarianController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\TargetController;
@@ -42,4 +43,11 @@ Route::post("/periode/tambah", [PeriodeController::class, 'store'])->name("perio
 Route::get("/target", [TargetController::class, 'index'])->name('target.index');
 Route::post("/target/tambah", [TargetController::class, 'store'])->name('target.tambah');
 Route::put("/target/edit", [TargetController::class, 'update'])->name('target.edit');
-Route::delete("target/delete", [TargetController::class, "delete"])->name("target.delete");
+Route::delete("/target/delete", [TargetController::class, "delete"])->name("target.delete");
+
+
+// Menangani CRUD Harian
+Route::get("/harian", [HarianController::class, "index"])->name("harian.index");
+Route::post("/harian/tambah", [HarianController::class, "store"])->name("harian.tambah");
+Route::put("/harian/edit", [HarianController::class, "update"])->name("harian.edit");
+Route::delete("/harian/delete", [HarianController::class, "delete"])->name("harian.delete");

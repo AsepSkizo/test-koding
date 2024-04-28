@@ -29,7 +29,7 @@
              <span>Target</span></a>
      </li>
      <li class="nav-item">
-         <a class="nav-link" href="index.html">
+         <a class="nav-link" href="{{ route('harian.index') }}">
              <i class="fas fa-fw fa-tachometer-alt"></i>
              <span>Harian</span></a>
      </li>
