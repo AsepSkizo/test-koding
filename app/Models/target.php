@@ -29,6 +29,6 @@ class target extends Model
      */
     public function periode(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'periode_id', 'id');
+        return $this->belongsTo(periode::class, 'periode_id', 'id');
     }
 }

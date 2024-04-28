@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\RekeningController;
+use App\Http\Controllers\TargetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,4 +39,7 @@ Route::post("/periode/tambah", [PeriodeController::class, 'store'])->name("perio
 
 
 // Menangani CRUD Target
-// Route::get("")
+Route::get("/target", [TargetController::class, 'index'])->name('target.index');
+Route::post("/target/tambah", [TargetController::class, 'store'])->name('target.tambah');
+Route::put("/target/edit", [TargetController::class, 'update'])->name('target.edit');
+Route::delete("target/delete", [TargetController::class, "delete"])->name("target.delete");
