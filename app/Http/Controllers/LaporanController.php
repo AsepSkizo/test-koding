@@ -82,8 +82,14 @@ class LaporanController extends Controller
             "datas" => $dataUang,
             "masa_berlaku_awal" => $masaBerlakuAwal,
             "masa_berlaku_akhir" => $masaBerlakuAkhir,
+            "id_periode" => $idPeriode,
             "tahun" => date("Y", strtotime($masaBerlakuAwal))
         ];
         return view("detail_laporan", $data);
+    }
+
+    public function detail_search(Request $request, $idPeriode)
+    {
+        return $request;
     }
 }

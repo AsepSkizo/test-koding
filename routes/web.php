@@ -56,3 +56,4 @@ Route::delete("/harian/delete", [HarianController::class, "delete"])->name("hari
 // Menangani Laporan
 Route::get("laporan", [LaporanController::class, "index"])->name("laporan.index");
 Route::get("laporan/{idPeriode}", [LaporanController::class, "detail"])->name("laporan.detail");
+Route::post("laporan/{idPeriode}/search", [LaporanController::class, "detail_search"])->name("laporan.detail");

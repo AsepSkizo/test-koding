@@ -1,9 +1,44 @@
 @extends('core.main')
 @section('content')
+    <div class="card shadow mb-4">
+        <!-- Card Header - Accordion -->
+        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button"
+            aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="m-0 font-weight-bold text-primary">Search</h6>
+        </a>
+        <!-- Card Content - Collapse -->
+        <div class="collapse" id="collapseCardExample" style="">
+            <div class="card-body">
+                <form action="{{ url("laporan/$id_periode/search") }}" method="POST">
+                    @csrf
+                    @method('post')
+                    <div class="row">
+                        <div class="mb-3 col-sm-4">
+                            <label for="rekening" class="form-label">Tanggal Awal</label>
+                            <input type="date" name="awal" class="form-control">
+                        </div>
+                        <div class="mb-3 col-sm-4">
+                            <label for="rekening" class="form-label">Tanggal Akhir</label>
+                            <input type="date" name="akhir" class="form-control">
+                        </div>
+                        <div class="mb-3 col-sm-4">
+                            <label for="rekening" class="form-label">Pembayaran</label>
+                            <select name="via" class="form-control" id="">
+                                <option value=""></option>
+                                <option value="Bank">Bank</option>
+                                <option value="Bendahara">Bendahara</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn-primary btn col-12">Cari</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="d-sm-flex align-items-center justify-content-center">
         <h1 class="h3 mb-0 text-gray-800">Laporan Pendapatan Asli Daerah Tahun {{ $tahun }}</h1>
     </div>
-    <div class="d-sm-flex align-items-center justify-content-center">
+    <div class="d-sm-flex align-items-center justify-content-center mb-4">
         <h4 class="h5 mb-0 text-gray-800">{{ $masa_berlaku_awal }} s/d {{ $masa_berlaku_akhir }}</h4>
     </div>
     <div class="card shadow mb-4">
@@ -13,7 +48,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th scope="col" rowspan="2">No</th>
                             <th scope="col" rowspan="2">Kode Rekening</th>
