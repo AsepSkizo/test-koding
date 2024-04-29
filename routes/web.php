@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HarianController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\TargetController;
@@ -51,3 +52,7 @@ Route::get("/harian", [HarianController::class, "index"])->name("harian.index");
 Route::post("/harian/tambah", [HarianController::class, "store"])->name("harian.tambah");
 Route::put("/harian/edit", [HarianController::class, "update"])->name("harian.edit");
 Route::delete("/harian/delete", [HarianController::class, "delete"])->name("harian.delete");
+
+// Menangani Laporan
+Route::get("laporan", [LaporanController::class, "index"])->name("laporan.index");
+Route::get("laporan/{idPeriode}", [LaporanController::class, "detail"])->name("laporan.detail");

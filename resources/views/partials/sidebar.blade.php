@@ -33,6 +33,11 @@
              <i class="fas fa-fw fa-tachometer-alt"></i>
              <span>Harian</span></a>
      </li>
+     <li class="nav-item">
+         <a class="nav-link" href="{{ route('laporan.index') }}">
+             <i class="fas fa-fw fa-tachometer-alt"></i>
+             <span>Laporan</span></a>
+     </li>
      <!-- Divider -->
      <hr class="sidebar-divider d-none d-md-block">
 
