@@ -75,4 +75,18 @@ class RekeningController extends Controller
             return redirect("rekening")->with("error", "Rekening Gagal dihapus");
         }
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input("query");
+
+        $rekenings = rekening::query()->where("kode_rekening", "LIKE", "%{$search}%")->orWhere("nama_rekening", "LIKE", "%{$search}%")->get();
+
+        $data = [
+            "title" => "Target",
+            "rekenings" => $rekenings,
+            "query" => $search
+        ];
+        return view("rekening", $data);
+    }
 }

@@ -30,6 +30,7 @@ Route::get('/', function () {
 
 // Menangani CRUD rekening
 Route::get("/rekening", [RekeningController::class, "index"])->name("rekening.index");
+Route::post("/rekening/search", [RekeningController::class, "search"])->name("rekening.search");
 Route::post("/rekening/tambah", [RekeningController::class, "store"])->name("rekening.tambah");
 Route::put("/rekening/edit/", [RekeningController::class, "update"])->name("rekening.edit");
 Route::delete("/rekening/delete/", [RekeningController::class, "delete"])->name("rekening.delete");

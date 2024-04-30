@@ -15,6 +15,28 @@
         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
             class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">+ Tambah Rekening</button>
     </div>
+    @if (isset($query))
+        <p>Result from "{{ $query }}"</p>
+    @endif
+    <div class="card shadow mb-4">
+        <!-- Card Header - Accordion -->
+        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button"
+            aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="m-0 font-weight-bold text-primary">Search</h6>
+        </a>
+        <!-- Card Content - Collapse -->
+        <div class="collapse" id="collapseCardExample" style="">
+            <div class="card-body">
+                <form action="{{ url('rekening/search') }}" method="POST">
+                    @csrf
+                    @method('post')
+                    <input type="text" class="form-control mb-3" name="query"
+                        placeholder="Cari Berdasarkan Kode dan Nama Rekening">
+                    <button class="btn-primary btn col-12">Cari</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Rekening</h6>
@@ -95,7 +117,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title fs-5" id="rekeningUpdateLabel">Ubah Rekening</h4>
-                    <button type="button" class="btn btn-block col-1" data-bs-dismiss="modal" aria-label="Close">X</button>
+                    <button type="button" class="btn btn-block col-1" data-bs-dismiss="modal"
+                        aria-label="Close">X</button>
                 </div>
                 <form action="{{ route('rekening.edit') }}" method="POST">
                     @csrf
