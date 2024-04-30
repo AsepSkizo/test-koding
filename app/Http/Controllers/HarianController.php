@@ -78,4 +78,28 @@ class HarianController extends Controller
             return redirect("harian")->with("error", "Entry Gagal dihapus");
         }
     }
+    public function search(Request $request)
+    {
+        $search = $request->input("query");
+
+        $rekenings = rekening::query()->where("kode_rekening", "LIKE", "%{$search}%")->orWhere("nama_rekening", "LIKE", "%{$search}%")->get();
+
+        $dataHarian = [];
+        $i = 0;
+        foreach ($rekenings as $rekening) {
+            $harians = harian::where("rekening_id", $rekening->id)->get();
+            // return $harian;
+            foreach ($harians as $harian) {
+                $dataHarian[$i] = $harian;
+                $i++;
+            }
+        }
+        $data = [
+            "title" => "Target",
+            "harians" => $dataHarian,
+            "rekenings" => rekening::all(),
+            "query" => $search
+        ];
+        return view("harian", $data);
+    }
 }

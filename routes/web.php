@@ -51,6 +51,7 @@ Route::delete("/target/delete", [TargetController::class, "delete"])->name("targ
 
 // Menangani CRUD Harian
 Route::get("/harian", [HarianController::class, "index"])->name("harian.index");
+Route::post("/harian/search", [HarianController::class, "search"])->name("harian.search");
 Route::post("/harian/tambah", [HarianController::class, "store"])->name("harian.tambah");
 Route::put("/harian/edit", [HarianController::class, "update"])->name("harian.edit");
 Route::delete("/harian/delete", [HarianController::class, "delete"])->name("harian.delete");
