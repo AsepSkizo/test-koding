@@ -97,17 +97,19 @@ class LaporanController extends Controller
         $masa_periode_awal = $periode->masa_berlaku_awal;
         $masa_periode_akhir = $periode->masa_berlaku_akhir;
 
-        if (($input_tanggal_awal != null && $input_tanggal_akhir == null) || ($input_tanggal_awal == null && $input_tanggal_akhir != null)) {
+        if ((($input_tanggal_awal != null && $input_tanggal_akhir == null) || ($input_tanggal_awal == null && $input_tanggal_akhir != null)) && $via == null) {
             return redirect("laporan/" . $request->periode)->with("error", "Data tidak ditemukan");
         }
         if ($input_tanggal_awal > $input_tanggal_akhir) {
             return redirect("laporan/" . $request->periode)->with("error", "Data tidak ditemukan");
         }
-        if (
-            $input_tanggal_awal < $periode->masa_berlaku_awal || $input_tanggal_awal > $periode->masa_berlaku_akhir ||
-            $input_tanggal_akhir < $periode->masa_berlaku_awal || $input_tanggal_akhir > $periode->masa_berlaku_akhir
-        ) {
-            return redirect("laporan/" . $request->periode)->with("error", "Data tidak ditemukan");
+        if ($input_tanggal_awal != null && $input_tanggal_akhir != null) {
+            if (
+                $input_tanggal_awal < $periode->masa_berlaku_awal || $input_tanggal_awal > $periode->masa_berlaku_akhir ||
+                $input_tanggal_akhir < $periode->masa_berlaku_awal || $input_tanggal_akhir > $periode->masa_berlaku_akhir
+            ) {
+                return redirect("laporan/" . $request->periode)->with("error", "Data tidak ditemukan");
+            }
         }
 
         if ($input_tanggal_awal == null && $input_tanggal_akhir == null && $via == null) {
@@ -213,6 +215,49 @@ class LaporanController extends Controller
                 "masa_berlaku_akhir" => $input_tanggal_akhir,
                 "id_periode" => $idPeriode,
                 "tahun" => $tahun
+            ];
+        }
+
+        // Jika filter tanggal kosong dan filter via bayar diisi
+        if ($input_tanggal_awal == null && $input_tanggal_akhir == null && $via != null) {
+            $i = 0;
+
+            // return $via;
+            // Mendata semua uang yg terkumpul bulan ini
+            $tanggal_awal_bulan_ini = date('Y-m-01');
+            $tanggal_akhir_bulan_ini = date('Y-m-t');
+            foreach ($targetTerkait as $target) {
+                $harians = harian::where("rekening_id", $target->rekening_id)->where("via", $via)->whereBetween("tanggal", [$masa_periode_awal, $masa_periode_akhir])->whereBetween("tanggal", [$tanggal_awal_bulan_ini, $tanggal_akhir_bulan_ini])->get();
+                $dataUang[$i] = [
+                    "rekening" => rekening::find($target->rekening_id),
+                    "target" => $target->target,
+                    "jumlah_bulan_ini" => 0,
+                    "jumlah_bulan_lalu" => 0,
+                    "jumlah" => 0
+                ];
+                foreach ($harians as $harian) {
+                    $dataUang[$i]["jumlah_bulan_ini"] += $harian->jumlah;
+                }
+                $i++;
+            }
+
+            $i = 0;
+
+            // Mendata semua uang yang terkumpul
+            foreach ($targetTerkait as $target) {
+                $harians = harian::where("rekening_id", $target->rekening_id)->where("via", $via)->whereBetween("tanggal", [$masa_periode_awal, $masa_periode_akhir])->get();
+                foreach ($harians as $harian) {
+                    $dataUang[$i]["jumlah"] += $harian->jumlah;
+                }
+                $i++;   
+            }
+            $data = [
+                "title" => "Laporan",
+                "datas" => $dataUang,
+                "masa_berlaku_awal" => $masa_periode_awal,
+                "masa_berlaku_akhir" => $masa_periode_akhir,
+                "id_periode" => $idPeriode,
+                "tahun" => date("Y", strtotime($masa_periode_awal))
             ];
         }
         if ($via != null) {

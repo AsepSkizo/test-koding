@@ -76,6 +76,7 @@
                             $totalTarget = 0;
                             $totalBulanLalu = 0;
                             $totalBulanIni = 0;
+                            $totalSemua = 0;
                         @endphp
                         @foreach ($datas as $data)
                             <tr>
@@ -93,14 +94,12 @@
                                     $totalTarget += $data['target'];
                                     $totalBulanLalu += $data['jumlah_bulan_lalu'];
                                     $totalBulanIni += $data['jumlah_bulan_ini'];
+                                    $totalSemua += $data['jumlah'];
                                 @endphp
                             </tr>
                         @endforeach
-                        @php
-                            $totalSemua = $totalBulanLalu + $totalBulanIni;
-                        @endphp
-                        <tr class="text-center">
-                            <td colspan="3">Total</td>
+                        <tr>
+                            <td colspan="3" class="text-center">Total</td>
                             <td>{{ number_format($totalTarget, '0', ',', '.') }}</td>
                             <td>{{ number_format($totalBulanLalu, '0', ',', '.') }}</td>
                             <td>{{ number_format($totalBulanIni, '0', ',', '.') }}</td>
