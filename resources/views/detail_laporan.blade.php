@@ -42,7 +42,7 @@
         </div>
     </div>
     <div class="d-sm-flex align-items-center justify-content-center">
-        <h1 class="h3 mb-0 text-gray-800">Laporan Pendapatan Asli Daerah {{ $via ? "Via $via" : '' }} Tahun
+        <h1 class="h3 mb-0 text-gray-800">Laporan Pendapatan Asli Daerah {{ @$via ? "Via $via" : '' }} Tahun
             {{ $tahun }}
         </h1>
     </div>
@@ -72,6 +72,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $totalTarget = 0;
+                            $totalBulanLalu = 0;
+                            $totalBulanIni = 0;
+                        @endphp
                         @foreach ($datas as $data)
                             <tr>
                                 <th scope="row">#</th>
@@ -84,8 +89,24 @@
                                 <td>
                                     {{ round(($data['jumlah'] / $data['target']) * 100, 2) }}
                                 </td>
+                                @php
+                                    $totalTarget += $data['target'];
+                                    $totalBulanLalu += $data['jumlah_bulan_lalu'];
+                                    $totalBulanIni += $data['jumlah_bulan_ini'];
+                                @endphp
                             </tr>
                         @endforeach
+                        @php
+                            $totalSemua = $totalBulanLalu + $totalBulanIni;
+                        @endphp
+                        <tr class="text-center">
+                            <td colspan="3">Total</td>
+                            <td>{{ number_format($totalTarget, '0', ',', '.') }}</td>
+                            <td>{{ number_format($totalBulanLalu, '0', ',', '.') }}</td>
+                            <td>{{ number_format($totalBulanIni, '0', ',', '.') }}</td>
+                            <td>{{ number_format($totalSemua, '0', ',', '.') }}</td>
+                            <td>{{ round(($totalSemua / $totalTarget) * 100, 2) }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
