@@ -78,7 +78,7 @@ class TargetController extends Controller
         // return $request;
         $target = target::with(["rekening", "periode"])->where("id", $request->id)->get();
         $countRekeningHarian = harian::where("rekening_id", $target[0]->rekening->id)->count();
-        $countPeriodeHarian = harian::where("tanggal", "<=", $target[0]->periode->masa_berlaku_akhir)->where("tanggal", ">=", $target[0]->periode->masa_berlaku_awal)->count();
+        $countPeriodeHarian = harian::whereBetween("tanggal", [$target[0]->periode->masa_berlaku_awal, $target[0]->periode->masa_berlaku_akhir])->count();
 
         if ($countPeriodeHarian > 0 && $countRekeningHarian > 0) {
             return redirect("target")->with("error", "Target Gagal dihapus");

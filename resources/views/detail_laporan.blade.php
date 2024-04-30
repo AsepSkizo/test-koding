@@ -1,5 +1,10 @@
 @extends('core.main')
 @section('content')
+    @if (Session('error') !== null)
+        <div class="alert alert-danger" role="alert">
+            {{ Session('error') }}
+        </div>
+    @endif
     <div class="card shadow mb-4">
         <!-- Card Header - Accordion -->
         <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button"
@@ -29,6 +34,7 @@
                                 <option value="Bendahara">Bendahara</option>
                             </select>
                         </div>
+                        <input type="hidden" value="{{ $id_periode }}" name="periode">
                     </div>
                     <button class="btn-primary btn col-12">Cari</button>
                 </form>
@@ -36,7 +42,9 @@
         </div>
     </div>
     <div class="d-sm-flex align-items-center justify-content-center">
-        <h1 class="h3 mb-0 text-gray-800">Laporan Pendapatan Asli Daerah Tahun {{ $tahun }}</h1>
+        <h1 class="h3 mb-0 text-gray-800">Laporan Pendapatan Asli Daerah {{ $via ? "Via $via" : '' }} Tahun
+            {{ $tahun }}
+        </h1>
     </div>
     <div class="d-sm-flex align-items-center justify-content-center mb-4">
         <h4 class="h5 mb-0 text-gray-800">{{ $masa_berlaku_awal }} s/d {{ $masa_berlaku_akhir }}</h4>
@@ -70,9 +78,9 @@
                                 <td>{{ $data['rekening']->kode_rekening }}</td>
                                 <td>{{ $data['rekening']->nama_rekening }}</td>
                                 <td>{{ number_format($data['target'], '0', ',', '.') }}</td>
-                                <td>{{ $data['jumlah_bulan_lalu'] }}</td>
-                                <td>{{ $data['jumlah_bulan_ini'] }}</td>
-                                <td>{{ $data['jumlah'] }}</td>
+                                <td>{{ number_format($data['jumlah_bulan_lalu'], '0', ',', '.') }}</td>
+                                <td>{{ number_format($data['jumlah_bulan_ini']), '0', ',', '.' }}</td>
+                                <td>{{ number_format($data['jumlah'], '0', ',', '.') }}</td>
                                 <td>
                                     {{ round(($data['jumlah'] / $data['target']) * 100, 2) }}
                                 </td>
