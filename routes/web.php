@@ -42,6 +42,7 @@ Route::post("/periode/tambah", [PeriodeController::class, 'store'])->name("perio
 
 // Menangani CRUD Target
 Route::get("/target", [TargetController::class, 'index'])->name('target.index');
+Route::post("/target/search", [TargetController::class, 'search'])->name('target.search');
 Route::post("/target/tambah", [TargetController::class, 'store'])->name('target.tambah');
 Route::put("/target/edit", [TargetController::class, 'update'])->name('target.edit');
 Route::delete("/target/delete", [TargetController::class, "delete"])->name("target.delete");
@@ -56,4 +57,4 @@ Route::delete("/harian/delete", [HarianController::class, "delete"])->name("hari
 // Menangani Laporan
 Route::get("laporan", [LaporanController::class, "index"])->name("laporan.index");
 Route::get("laporan/{idPeriode}", [LaporanController::class, "detail"])->name("laporan.detail");
-Route::post("laporan/{idPeriode}/search", [LaporanController::class, "detail_search"])->name("laporan.detail");
+Route::post("laporan/{idPeriode}/search", [LaporanController::class, "detail_search"])->name("laporan.detail_post");

@@ -93,4 +93,31 @@ class TargetController extends Controller
             return redirect("target")->with("error", "Target Gagal dihapus");
         }
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input("query");
+
+        $rekenings = rekening::query()->where("kode_rekening", "LIKE", "%{$search}%")->orWhere("nama_rekening", "LIKE", "%{$search}%")->get();
+
+        $daraTarget = [];
+        $i = 0;
+        foreach ($rekenings as $rekening) {
+            $targets = target::where("rekening_id", $rekening->id)->get();
+            // return $targets;
+            foreach ($targets as $target) {
+                $daraTarget[$i] = $target;
+                $i++;
+            }
+        }
+
+        $data = [
+            "title" => "Target",
+            "targets" => $daraTarget,
+            "rekenings" => rekening::all(),
+            "periodes" => periode::all(),
+            "query" => $search
+        ];
+        return view("target", $data);
+    }
 }
